@@ -164,9 +164,9 @@
     </div>
     <button class="glow-button" onclick="toggleAccessPanel()">Request Access to Professional Side</button>
     <div class="access-panel">
-      <form class="email-form" action="https://formspree.io/f/mrbqyvvn" method="POST">
-        <input type="email" id="email" placeholder="Enter your email" required />
-        <button type="submit">Request Access</button>
+      <form id="contact-form" class="email-form">
+  <input type="email" name="user_email" id="email-input" placeholder="Enter your email" required />
+  <button type="submit">Request Access</button>
       </form>
     </div>
   </header>
@@ -183,5 +183,23 @@
     </div>
   </div>
   <script src="biotechProFeatures.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init("yfWd-phDeEeZgoVPy"); // Your public key
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    emailjs.sendForm("Vaitheeshwaran_Portfolio", "template_7sjc7ps", this)
+      .then(function() {
+        alert("Request sent successfully!");
+        document.querySelector('.professional-section').style.display = 'block';
+        document.querySelector('.access-panel').style.display = 'none';
+      }, function(error) {
+        alert("FAILED...", error);
+      });
+  });
+</script>
 </body>
 </html>
